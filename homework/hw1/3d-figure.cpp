@@ -32,7 +32,7 @@ std::vector <std::vector<GLfloat>> color_calc(int rect_cnt, int face_cnt) {
 
 int main(void)
 {
-	//настраиваем общие параметры и настройки
+	//Г­Г Г±ГІГ°Г ГЁГўГ ГҐГ¬ Г®ГЎГ№ГЁГҐ ГЇГ Г°Г Г¬ГҐГІГ°Г» ГЁ Г­Г Г±ГІГ°Г®Г©ГЄГЁ
 	if (!glfwInit())
 	{
 		fprintf(stderr, "Failed to initialize GLFW\n");
@@ -66,13 +66,13 @@ int main(void)
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 	glClearColor(0.0f, 0.0f, 0.1f, 0.0f);
 
-	// Включить тест глубины
+	// Г‚ГЄГ«ГѕГ·ГЁГІГј ГІГҐГ±ГІ ГЈГ«ГіГЎГЁГ­Г»
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
-	//альфа-канальность
+	//Г Г«ГјГґГ -ГЄГ Г­Г Г«ГјГ­Г®Г±ГІГј
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//конец настройки
+	//ГЄГ®Г­ГҐГ¶ Г­Г Г±ГІГ°Г®Г©ГЄГЁ
 
 
 
@@ -86,9 +86,9 @@ int main(void)
 	GLuint MatrixIDaxis = glGetUniformLocation(programIDaxis, "MVP");
 
 
-	/// натройски движения камеры
-	//камера будет двигаться по горизонтальной окружности радиуса 7, со угловой скоростью Pi / 1000 и 
-	//лелать обороты в вертикальной плоскости по окружности радиуса 5.5
+	/// Г­Г ГІГ°Г®Г©Г±ГЄГЁ Г¤ГўГЁГ¦ГҐГ­ГЁГї ГЄГ Г¬ГҐГ°Г»
+	//ГЄГ Г¬ГҐГ°Г  ГЎГіГ¤ГҐГІ Г¤ГўГЁГЈГ ГІГјГ±Гї ГЇГ® ГЈГ®Г°ГЁГ§Г®Г­ГІГ Г«ГјГ­Г®Г© Г®ГЄГ°ГіГ¦Г­Г®Г±ГІГЁ Г°Г Г¤ГЁГіГ±Г  7, Г±Г® ГіГЈГ«Г®ГўГ®Г© Г±ГЄГ®Г°Г®Г±ГІГјГѕ Pi / 1000 ГЁ 
+	//Г«ГҐГ«Г ГІГј Г®ГЎГ®Г°Г®ГІГ» Гў ГўГҐГ°ГІГЁГЄГ Г«ГјГ­Г®Г© ГЇГ«Г®Г±ГЄГ®Г±ГІГЁ ГЇГ® Г®ГЄГ°ГіГ¦Г­Г®Г±ГІГЁ Г°Г Г¤ГЁГіГ±Г  5.5
 	const double speed = M_PI / 5000;
 	const double radius = 7;
 
@@ -108,7 +108,7 @@ int main(void)
 	glm::mat4 Model = glm::mat4(1.0f);
 	glm::mat4 MVP = Projection * View * Model;
 
-	//строим саму фигуру
+	//Г±ГІГ°Г®ГЁГ¬ Г±Г Г¬Гі ГґГЁГЈГіГ°Гі
 	const int face_cnt = 4;
 	const int rect_cnt = 4;
 	const int p_in_rect = 6;
@@ -119,7 +119,7 @@ int main(void)
 
 	const int sz = p_in_rect * rect_cnt * face_cnt;
 	static GLfloat ring_vertex[3 * sz];
-	//внутрянняя область
+	//ГўГ­ГіГІГ°ГїГ­Г­ГїГї Г®ГЎГ«Г Г±ГІГј
 	for (int i = 0; i < rect_cnt; i++) {
 		ring_vertex[3 * p_in_rect * i] = inPRadius * std::sin(i * pangle);
 		ring_vertex[3 * p_in_rect * i + 1] = lb;
@@ -145,7 +145,7 @@ int main(void)
 		ring_vertex[3 * p_in_rect * i + 16] = ub;
 		ring_vertex[3 * p_in_rect * i + 17] = inPRadius * std::cos((i + 1) * pangle);
 	}
-	//внешняя область
+	//ГўГ­ГҐГёГ­ГїГї Г®ГЎГ«Г Г±ГІГј
 	for (int i = 0; i < rect_cnt; i++) {
 		ring_vertex[3 * p_in_rect * (rect_cnt + i)] = outPRadius * std::sin(i * pangle);
 		ring_vertex[3 * p_in_rect * (rect_cnt + i) + 1] = lb;
@@ -171,7 +171,7 @@ int main(void)
 		ring_vertex[3 * p_in_rect * (rect_cnt + i) + 16] = ub;
 		ring_vertex[3 * p_in_rect * (rect_cnt + i) + 17] = outPRadius * std::cos((i + 1) * pangle);
 	}
-	//верхняя область
+	//ГўГҐГ°ГµГ­ГїГї Г®ГЎГ«Г Г±ГІГј
 	for (int i = 0; i < rect_cnt; i++) {
 		ring_vertex[3 * p_in_rect * (2 * rect_cnt + i)] = inPRadius * std::sin(i * pangle);
 		ring_vertex[3 * p_in_rect * (2 * rect_cnt + i) + 1] = ub;
@@ -197,7 +197,7 @@ int main(void)
 		ring_vertex[3 * p_in_rect * (2 * rect_cnt + i) + 16] = ub;
 		ring_vertex[3 * p_in_rect * (2 * rect_cnt + i) + 17] = outPRadius * std::cos((i + 1) * pangle);
 	}
-	//нижняя область
+	//Г­ГЁГ¦Г­ГїГї Г®ГЎГ«Г Г±ГІГј
 	for (int i = 0; i < rect_cnt; i++) {
 		ring_vertex[3 * p_in_rect * (3 * rect_cnt + i)] = inPRadius * std::sin(i * pangle);
 		ring_vertex[3 * p_in_rect * (3 * rect_cnt + i) + 1] = lb;
@@ -224,29 +224,29 @@ int main(void)
 		ring_vertex[3 * p_in_rect * (3 * rect_cnt + i) + 17] = outPRadius * std::cos((i + 1) * pangle);
 	}
 
-	//пронумеруем точки и вычислим их цвета: нумерация по кругу, 
-	//сначала верхние, потом нижние, от внутренних к внешним
+	//ГЇГ°Г®Г­ГіГ¬ГҐГ°ГіГҐГ¬ ГІГ®Г·ГЄГЁ ГЁ ГўГ»Г·ГЁГ±Г«ГЁГ¬ ГЁГµ Г¶ГўГҐГІГ : Г­ГіГ¬ГҐГ°Г Г¶ГЁГї ГЇГ® ГЄГ°ГіГЈГі, 
+	//Г±Г­Г Г·Г Г«Г  ГўГҐГ°ГµГ­ГЁГҐ, ГЇГ®ГІГ®Г¬ Г­ГЁГ¦Г­ГЁГҐ, Г®ГІ ГўГ­ГіГІГ°ГҐГ­Г­ГЁГµ ГЄ ГўГ­ГҐГёГ­ГЁГ¬
 	std::vector<std::vector<GLfloat>> color = color_calc(rect_cnt, face_cnt);
 	static GLfloat ring_color[4 * sz];
-	//внутрянняя область
-	for (int i = 0; i < rect_cnt; i++) { //нижняя левая точка
+	//ГўГ­ГіГІГ°ГїГ­Г­ГїГї Г®ГЎГ«Г Г±ГІГј
+	for (int i = 0; i < rect_cnt; i++) { //Г­ГЁГ¦Г­ГїГї Г«ГҐГўГ Гї ГІГ®Г·ГЄГ 
 		for (int p = 0; p < 4; ++p) {
 			ring_color[4 * p_in_rect * i + p] = color[i + 2 * rect_cnt][p];
 		}
-		for (int p = 0; p < 4; ++p) { //нижняя правая точка
+		for (int p = 0; p < 4; ++p) { //Г­ГЁГ¦Г­ГїГї ГЇГ°Г ГўГ Гї ГІГ®Г·ГЄГ 
 			ring_color[4 * p_in_rect * i + 4 + p] = color[(i + 1) % rect_cnt + 2 * rect_cnt][p];
 			ring_color[4 * p_in_rect * i + 16 + p] = color[(i + 1) % rect_cnt + 2 * rect_cnt][p];
 		}
-		for (int p = 0; p < 4; ++p) { //верхняя левая точка
+		for (int p = 0; p < 4; ++p) { //ГўГҐГ°ГµГ­ГїГї Г«ГҐГўГ Гї ГІГ®Г·ГЄГ 
 			ring_color[4 * p_in_rect * i + 8 + p] = color[i][p];
 			ring_color[4 * p_in_rect * i + 12 + p] = color[i][p];
 
 		}
-		for (int p = 0; p < 4; ++p) { //верхняя правая точка
+		for (int p = 0; p < 4; ++p) { //ГўГҐГ°ГµГ­ГїГї ГЇГ°Г ГўГ Гї ГІГ®Г·ГЄГ 
 			ring_color[4 * p_in_rect * i + 20 + p] = color[(i + 1) % rect_cnt][p];
 		}
 	}
-	//внешняя область
+	//ГўГ­ГҐГёГ­ГїГї Г®ГЎГ«Г Г±ГІГј
 	for (int i = 0; i < rect_cnt; i++) {
 		for (int p = 0; p < 4; ++p) {
 			ring_color[4 * p_in_rect * (rect_cnt + i) + p] = color[i + rect_cnt + 2 * rect_cnt][p];
@@ -263,7 +263,7 @@ int main(void)
 			ring_color[4 * p_in_rect * (rect_cnt + i) + 20 + p] = color[(i + 1) % rect_cnt + rect_cnt][p];
 		}
 	}
-	//верхняя область
+	//ГўГҐГ°ГµГ­ГїГї Г®ГЎГ«Г Г±ГІГј
 	for (int i = 0; i < rect_cnt; i++) {
 		for (int p = 0; p < 4; ++p) {
 			ring_color[4 * p_in_rect * (2 * rect_cnt + i) + p] = color[i][p];
@@ -280,7 +280,7 @@ int main(void)
 			ring_color[4 * p_in_rect * (2 * rect_cnt + i) + 20 + p] = color[(i + 1) % rect_cnt + rect_cnt][p];
 		}
 	}
-	//нижняя область
+	//Г­ГЁГ¦Г­ГїГї Г®ГЎГ«Г Г±ГІГј
 	for (int i = 0; i < rect_cnt; i++) {
 		for (int p = 0; p < 4; ++p) {
 			ring_color[4 * p_in_rect * (3 * rect_cnt + i) + p] = color[i + 2 * rect_cnt][p];
@@ -299,20 +299,20 @@ int main(void)
 	}
 
 	static const GLfloat axis_vertex[] = {
-		-10.0f, 0.0f, 0.0f, // ось X
+		-10.0f, 0.0f, 0.0f, // Г®Г±Гј X
 		10.0f, 0.0f, 0.0f,
-		0.0f, -10.0f, 0.0f, // ось Y
+		0.0f, -10.0f, 0.0f, // Г®Г±Гј Y
 		0.0f, 10.0f, 0.0f,
 		0.0f, 0.0f, -10.0f,
 		0.0f, 0.0f, 10.0f,
 	};
 
 	static const GLfloat axis_color[] = {
-		1.0f,  1.0f,  1.0f, 0.5f, // ось X
+		1.0f,  1.0f,  1.0f, 0.5f, // Г®Г±Гј X
 		1.0f,  1.0f,  1.0f, 0.5f,
-		1.0f,  1.0f,  1.0f, 0.5f, // ось Y
+		1.0f,  1.0f,  1.0f, 0.5f, // Г®Г±Гј Y
 		1.0f,  1.0f,  1.0f, 0.5f,
-		1.0f,  1.0f,  1.0f, 0.5f, // ось Z
+		1.0f,  1.0f,  1.0f, 0.5f, // Г®Г±Гј Z
 		1.0f,  1.0f,  1.0f, 0.5f,
 	};
 
@@ -345,7 +345,7 @@ int main(void)
 		);
 		MVP = Projection * View * Model;
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //не забываем очищать z-буфер
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Г­ГҐ Г§Г ГЎГ»ГўГ ГҐГ¬ Г®Г·ГЁГ№Г ГІГј z-ГЎГіГґГҐГ°
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 
@@ -367,10 +367,10 @@ int main(void)
 		glUseProgram(programIDaxis);
 		glUniformMatrix4fv(MatrixIDaxis, 1, GL_FALSE, &MVP[0][0]);
 
-		glBindBuffer(GL_ARRAY_BUFFER, axis_vertex_buf); //координаты
+		glBindBuffer(GL_ARRAY_BUFFER, axis_vertex_buf); //ГЄГ®Г®Г°Г¤ГЁГ­Г ГІГ»
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-		glBindBuffer(GL_ARRAY_BUFFER, axis_color_buf); //цвет
+		glBindBuffer(GL_ARRAY_BUFFER, axis_color_buf); //Г¶ГўГҐГІ
 		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 		glDrawArrays(GL_LINES, 0, sz);
